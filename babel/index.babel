@@ -1,0 +1,468 @@
+//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js
+
+class Headline extends React.Component {
+  render() {
+    return (
+      <h1 className='jumbotron'>Twitch Coding Streamers</h1>
+    );
+  }
+}
+
+class Channels extends React.Component {
+  render() {
+    return (
+      <div>
+        
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='OgamingSC2-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='OgamingSC2-img' src='#' />
+              OgamingSC2</a>
+            <p className='col-xs-6' id='OgamingSC2-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='esl-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='esl-img' src='#' />
+              EST_SC2</a>
+            <p className='col-xs-6' id='esl-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='freecodecamp-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='freecodecamp-img' src='#' />
+              Freecodecamp</a>
+            <p className='col-xs-6' id='freecodecamp-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='storbeck-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='storbeck-img' src='#' />storbeck</a>
+            <p className='col-xs-6' id='storbeck-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='terakilobyte-a'><img class='img-responsive img-circle img-thumbnail' id='terakilobyte-img' src='#' />terakilobyte</a>
+            <p className='col-xs-6' id='terakilobyte-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='habathcx-a'><img class='img-responsive img-circle img-thumbnail' id='habathcx-img' src='#' />habathcx</a>
+            <p className='col-xs-6' id='habathcx-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='robotcaleb-a'><img class='img-responsive img-circle img-thumbnail' id='robotcaleb-img' src='#' />RobotCaleb</a>
+            <p className='col-xs-6' id='robotcaleb-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='thomasballinger-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='thomasballinger-img' src='#' />thomasballinger</a>
+            <p className='col-xs-6' id='thomasballinger-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='noobs2ninjas-a'>
+              <img className='img-responsive img-circle img-thumbnail' id='noobs2ninjas-img' src='#' />noobs2ninjas</a>
+            <p className='col-xs-6' id='noobs2ninjas-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a class='col-xs-6' href='#' target='_blank' id='beohoff-a'><img class='img-responsive img-circle img-thumbnail' id='beohoff-img' src='#' />beohoff</a>
+            <p class='col-xs-6' id='beohoff-p'></p>
+          </div>
+        </div>
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='brunofin-a'><img class='img-responsive img-circle img-thumbnail' id='brunofin-img' src='#' />brunofin</a>
+            <p className='col-xs-6' id='brunofin-p'></p>
+          </div>
+        </div>
+
+
+        <div className='row'>
+          <div className='col card'>
+            <a className='col-xs-6' href='#' target='_blank' id='comster404-a'><img class='img-responsive img-circle img-thumbnail' id='comster404-img' src='#'/>comster404</a>
+            <p className='col-xs-6' id='comster404-p'></p>
+          </div>
+        </div>
+
+
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className='container'>
+        <Headline />
+        <Channels />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+
+// Start
+$(document).ready(function() {
+  
+  //OgamingSC2
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/OgamingSC2?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#OgamingSC2-p')
+        .text('offline')
+        .addClass('text-danger');
+    }
+
+    $('#OgamingSC2-p')
+      .text(data.stream.game + ' - ' + data.stream.channel.status)
+      .addClass('text-primary');
+
+    $('#OgamingSC2-a').attr('href', data.stream.channel.url);
+
+    // console.log(data);
+
+  });
+
+  //Gets channel info
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/OgamingSC2?callback=?', function(data) {
+
+    $('#OgamingSC2-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#OgamingSC2-p').text('Account Closed');
+    }
+
+    $('#OgamingSC2-a').attr('href', data.url);
+    // console.log(data);
+  });
+  
+  //ESL_SC2
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/ESL_SC2?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#esl-p')
+        .text('offline')
+        .addClass('text-danger');
+    }
+
+    $('#esl-p')
+      .text(data.stream.game + ' - ' + data.stream.channel.status)
+      .addClass('text-primary');
+
+    $('#esl-a').attr('href', data.stream.channel.url);
+
+    // console.log(data);
+
+  });
+
+  //Gets channel info
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/ESL_SC2?callback=?', function(data) {
+
+    $('#esl-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#esl-p').text('Account Closed');
+    }
+
+    $('#esl-a').attr('href', data.url);
+    // console.log(data);
+  });
+
+  //Freecodecamp
+
+  //Gets stream info
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/freecodecamp?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#freecodecamp-p')
+        .text('offline')
+        .addClass('text-danger');
+    }
+
+    $('#freecodecamp-p')
+      .text(data.stream.game + ' - ' + data.stream.channel.status)
+      .addClass('text-primary');
+
+    $('#freecodecamp-a').attr('href', data.stream.channel.url);
+
+    // console.log(data);
+
+  });
+
+  //Gets channel info
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/freecodecamp?callback=?', function(data) {
+
+    $('#freecodecamp-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#freecodecamp-p').text('Account Closed');
+    }
+
+    $('#freecodecamp-a').attr('href', data.url);
+    // console.log(data);
+  });
+
+  //Storbeck
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/storbeck?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#storbeck-p')
+        .text('offline')
+        .addClass('text-danger');
+    } 
+
+    $('#storbeck-p')
+      .text(data.stream.game + ' - ' + data.stream.channel.status)
+      .addClass('text-primary');
+
+    $('#storbeck-a').attr('href', data.stream.channel.url);      
+    // console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/storbeck?callback=?', function(data) {
+
+    $('#storbeck-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#storbeck-p').text('Account Closed');
+    } 
+
+    $('#storbeck-a').attr('href', data.url);
+    // console.log(data);
+  });
+
+  //terakilobyte
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/terakilobyte?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#terakilobyte-p')
+        .text('offline')
+        .addClass('text-danger');
+    } 
+
+    $('#terakilobyte-p')
+      .text(data.stream.game + ' - ' + data.stream.channel.status)
+      .addClass('text-primary');
+
+    $('#terakilobyte-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/terakilobyte?callback=?', function(data) {
+
+    $('#terakilobyte-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#terakilobyte-p').text('Account Closed');
+    } 
+
+    $('#terakilobyte-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //habathcx
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/habathcx?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#habathcx-p')
+        .text('offline')
+        .addClass('text-danger');
+    } 
+
+    $('#habathcx-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#habathcx-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/habathcx?callback=?', function(data) {
+    $('#habathcx-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#habathcx-p').text('Account Closed');
+    } 
+
+    $('#habathcx-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //RobotCaleb
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/robotcaleb?callback=?', function(data) {
+
+    if (data.stream === null) {
+      $('#robotcaleb-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#robotcaleb-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#robotcaleb-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/robotcaleb?callback=?', function(data) {
+
+    $('#robotcaleb-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#robotcaleb-p').text('Account Closed').addClass('text-danger');
+    } 
+
+    $('#robotcaleb-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //thomasballinger
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/thomasballinger?callback=?', function(data) {
+
+    if (data.stream === null) {
+      $('#thomasballinger-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#thomasballinger-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#thomasballinger-a').attr('href', data.stream.channel.url);
+
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/thomasballinger?callback=?', function(data) {
+
+    $('#thomasballinger-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#thomasballinger-p').text('Account Closed');
+    } 
+
+    $('#thomasballinger-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //noobs2ninjas
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/noobs2ninjas?callback=?', function(data) {
+
+    if (data.stream === null) {
+      $('#noobs2ninjas-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#noobs2ninjas-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#noobs2ninjas-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/noobs2ninjas?callback=?', function(data) {
+
+    $('#noobs2ninjas-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#noobs2ninjas-p').text('Account Closed');
+    } 
+
+    $('#noobs2ninjas-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //beohoff
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/beohoff?callback=?', function(data) {
+
+    if (data.stream === null) {
+      $('#beohoff-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#beohoff-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#beohoff-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/beohoff?callback=?', function(data) {
+
+    $('#beohoff-img').attr('src', data.logo);    
+
+    if (data.error) {
+      $('#beohoff-p').text('Account Closed');
+    } 
+
+    $('#beohoff-a').attr('href', data.url);
+    //console.log(data);
+  });
+
+  //brunofin
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/brunofin?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#brunofin-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#brunofin-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#brunofin-a').attr('href', data.stream.channel.url);
+    // console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/brunofin?callback=?', function(data) {
+
+    $('#brunofin-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#brunofin-p').text('Account Closed');
+    } 
+
+    $('#brunofin-a').attr('href', data.url);
+    // console.log(data);
+  });
+
+  //Comster404
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/comster404?callback=?', function(data) {
+
+    if (data.stream == null) {
+      $('#comster404-p').text('offline').addClass('text-danger');
+    } 
+
+    $('#comster404-p').text(data.stream.game + ' - ' + data.stream.channel.status).addClass('text-primary');
+
+    $('#comster404-a').attr('href', data.stream.channel.url);
+    //console.log(data);
+  });
+
+  $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/comster404?callback=?', function(data) {
+
+    $('#comster404-img').attr('src', data.logo);
+
+    if (data.error) {
+      $('#comster404-p').text('Account Closed');
+    } 
+
+    $('#comster404-a').attr('href', data.url);
+    // console.log(data.data);
+  });
+
+}); // End
